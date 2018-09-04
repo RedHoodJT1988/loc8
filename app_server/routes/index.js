@@ -1,12 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var ctrlMain = require('../controllers/main');
+var ctrlLocations = require('../controllers/locations');
+var ctrlOthers = require('../controllers/others');
 
-var homepageController = function(req, res) {
-  res.render('index', { title: 'Express' });
-};
+/* Locations pages */
+router.get('/', ctrlLocations.homelist);
+router.get('/location/:locationid', ctrlLocations.locationInfo);
+router.get('/location/:locationid/review/new', ctrlLocations.addReview);
+router.post('/location/:locationid/review/new', ctrlLocations.doAddReview);
 
-/* GET home page. */
-router.get('/', ctrlMain.index);
+/* Other pages */
+router.get('/about', ctrlOthers.about);
 
 module.exports = router;
